@@ -7,6 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        primary:['"Cairo"','sans-serif']
+      },
+      colors:{
+        jetBlack: "#262626",
+        raisinBlack:"#242223",
+        silverGray:"#7B7B7B",
+        lightGray:"#E9E9E9",
+        onyx:"#333333"
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
