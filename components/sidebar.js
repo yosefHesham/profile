@@ -39,9 +39,9 @@ export default function SideBar() {
         className="mx-auto"
       />
 
-      <div className="mt-14 flex flex-col gap-4">
+      <div className="mt-14 flex flex-col gap-4 overflow-hidden ">
         {sideData.map((item, index) => (
-          <div key={index} className="w-full">
+          <div key={index} className="w-full overflow-hidden">
             <div
               onClick={() => setActive(index)}
               className={`relative flex items-center justify-center ${
@@ -52,7 +52,13 @@ export default function SideBar() {
             >
               <div className="flex gap-4 items-center">
                 <Image src={item.icon} alt={item.title} />
-                <p className="font-semibold">{item.title}</p>
+                <p
+                  className={`font-semibold ${
+                    isActive(index) ? "text-[#EC232B]" : "text-onyx"
+                  }`}
+                >
+                  {item.title}
+                </p>
               </div>
               {item.subMenu && (
                 <Image
@@ -68,8 +74,14 @@ export default function SideBar() {
                 />
               )}
             </div>
-            {expand[index] && item.subMenu && (
-              <div className="ml-32 flex flex-col gap-4 mt-2">
+            {item.subMenu && (
+              <div
+                className={`ml-32 flex flex-col gap-4 mt-2     transition-all  duration-500 ease-in-out transform ${
+                  expand[index]
+                    ? "max-h-96 opacity-100 translate-y-0 mt-4"
+                    : "max-h-0 opacity-0 -translate-y-4"
+                } `}
+              >
                 {item.subMenu.map((subItem, subIndex) => (
                   <div key={subIndex} className="flex gap-2">
                     <Image src={subItem.icon} alt={subItem.title} />
