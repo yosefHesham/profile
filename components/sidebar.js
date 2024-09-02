@@ -32,7 +32,7 @@ export default function SideBar() {
   };
 
   return (
-    <section className="rounded-2xl w-1/4 p-4 shadow-md font-primary">
+    <section className="rounded-2xl w-1/3 p-4 h-screen top-0 sticky shadow-md font-primary">
       <Image
         src={require("../public/logo.png")}
         alt="logo"
@@ -41,10 +41,10 @@ export default function SideBar() {
 
       <div className="mt-14 flex flex-col gap-4 overflow-hidden ">
         {sideData.map((item, index) => (
-          <div key={index} className="w-full overflow-hidden">
+          <div key={index} className="w-full overflow-hidden cursor-pointer">
             <div
               onClick={() => setActive(index)}
-              className={`relative flex items-center justify-center ${
+              className={`relative flex items-center transition-all duration-100 ease-in-out justify-center ${
                 isActive(index)
                   ? "bg-[#F9EAEB] rounded-r-lg p-2 border-l-2 border-[#EC232B]"
                   : ""
@@ -68,7 +68,6 @@ export default function SideBar() {
                     expand[index] ? "rotate-90" : ""
                   }`}
                   onClick={(e) => {
-                    e.stopPropagation();
                     handleExpand(index);
                   }}
                 />
