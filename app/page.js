@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
@@ -15,8 +16,9 @@ export default function Home() {
     },
   });
 
+  const router = useRouter();
   const onSubmit = (e) => {
-    console.log(e);
+    router.push("/profile");
   };
 
   return (

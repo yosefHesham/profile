@@ -3,7 +3,7 @@ import Image from "next/image";
 import UserNav from "./userNav";
 import { useState } from "react";
 
-export default function Bio() {
+export default function Bio({ data }) {
   const [editable, setEditable] = useState(false);
   return (
     <section className="font-primary w-full mt-10">
@@ -44,7 +44,7 @@ export default function Bio() {
         </button>
       </div>
 
-      <UserNav isEditable={editable} />
+      <UserNav isEditable={editable} data={data} />
     </section>
   );
 }
