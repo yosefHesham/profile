@@ -17,7 +17,7 @@ export default function Bio({ data }) {
         <p>Profile</p>
       </div>
 
-      <div className="flex justify-between py-4 border-b mt-5 border-[#A2A1A8]">
+      <div className="flex justify-between py-4 border-b mt-5  border-[#A2A1A833]">
         <div className="flex gap-3">
           <Image src={require("../../public/person.png")} alt="person" />
           <div className="flex flex-col gap-2">
@@ -35,7 +35,7 @@ export default function Bio({ data }) {
         <button
           type="submit"
           onClick={() => setEditable(true)}
-          className="  bg-jetBlack p-4  mr-20 self-end text-white font-bold rounded-md "
+          className="  bg-jetBlack p-4  transition-all duration-100 ease-in-out hover:scale-110 mr-20 self-end text-white font-bold rounded-md "
         >
           <div className="flex  gap-3 font-bold text-white">
             <Image src={require("../../public/edit.png")} alt="edit" />

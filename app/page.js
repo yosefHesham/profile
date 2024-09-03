@@ -87,7 +87,7 @@ export default function Home() {
 
           <button
             type="submit"
-            className="w-[80%] mx-auto bg-jetBlack text-white font-bold rounded-md p-3"
+            className="w-[80%] mx-auto transition-all duration-100  ease-in-out hover:scale-110 bg-jetBlack text-white font-bold rounded-md p-3"
           >
             Login
           </button>
