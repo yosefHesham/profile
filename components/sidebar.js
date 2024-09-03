@@ -45,10 +45,13 @@ export default function SideBar({ hideMenu }) {
           <div
             key={index}
             className="w-full overflow-hidden cursor-pointer"
-            onClick={() => hideMenu && hideMenu()}
+            onClick={() => hideMenu && !item.subMenu && hideMenu()}
           >
             <div
-              onClick={() => setActive(index)}
+              onClick={() => {
+                item.subMenu && handleExpand(index);
+                setActive(index);
+              }}
               className={`relative flex items-center transition-all duration-100 ease-in-out justify-start ${
                 isActive(index) ? "bg-[#F9EAEB]  rounded-r-lg py-2" : ""
               }`}
@@ -73,11 +76,6 @@ export default function SideBar({ hideMenu }) {
                   className={`absolute right-4 cursor-pointer transition-all transform duration-100 ease-in-out ${
                     expand[index] ? "rotate-90" : ""
                   }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-
-                    handleExpand(index);
-                  }}
                 />
               )}
             </div>
@@ -90,7 +88,11 @@ export default function SideBar({ hideMenu }) {
                 } `}
               >
                 {item.subMenu.map((subItem, subIndex) => (
-                  <div key={subIndex} className="flex gap-2">
+                  <div
+                    key={subIndex}
+                    className="flex gap-2"
+                    onClick={() => hideMenu && hideMenu()}
+                  >
                     <Image src={subItem.icon} alt={subItem.title} />
                     <p
                       className={`${

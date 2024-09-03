@@ -4,7 +4,7 @@ import SideBar from "@/components/sidebar";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function TopBar() {
+export default function TopBar({ image }) {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -24,11 +24,7 @@ export default function TopBar() {
             alt="notification"
             className="size-10"
           />
-          <Image
-            src={require("../../public/person.png")}
-            alt="notification"
-            className="rounded-full size-16"
-          />
+          <img src={image} alt="person" className="rounded-full size-16" />
         </div>
       </div>
       {showMenu && (
@@ -37,7 +33,7 @@ export default function TopBar() {
           onClick={() => setShowMenu(false)}
         >
           <div
-            className="w-11/12 sticky top-10"
+            className="w-11/12 h-screen sticky top-0"
             onClick={(e) => e.stopPropagation()}
           >
             <SideBar hideMenu={() => setShowMenu(false)} />

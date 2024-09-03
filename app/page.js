@@ -4,6 +4,32 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+
+async function login(email, password) {
+  const url = "https://cyparta-backend-gf7qm.ondigitalocean.app/api/login/";
+
+  const loginData = {
+    email: email,
+    password: password,
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export default function Home() {
   const {
@@ -18,17 +44,31 @@ export default function Home() {
   });
 
   const router = useRouter();
-  const onSubmit = (e) => {
+
+  const onSubmit = async (e) => {
+    setLoading(true);
+    const result = await login(e.email, e.password);
+    if (result.detail) {
+      toast(result.detail, {
+        style: { backgroundColor: "red", color: "white", fontWeight: "bold" },
+      });
+      setLoading(false);
+
+      return;
+    }
+    localStorage.setItem("token", result.access);
     router.push("/profile");
   };
 
   const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   return (
     <main className="flex flex-col items-center mt-24 font-primary">
       <Image src={require("../public/logo.png")} alt="logo" />
 
       <section
-        className="rounded-md p-4  mt-7 border border-lightGray w-[90%] md:w-[50%] lg:[30%] mx-auto"
+        className="rounded-lg p-4  mt-7 border border-lightGray w-[90%] md:w-[50%] lg:w-[35%] mx-auto"
         style={{ boxShadow: " 0px 4px 4px 0px #9D9D9D33" }}
       >
         <form
@@ -76,8 +116,8 @@ export default function Home() {
               {...register("password", {
                 required: "Password is required",
                 minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters long",
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
                 },
               })}
               className="w-full p-2  border rounded-md shadow-sm focus:outline-none  focus:border-onyx"
@@ -99,9 +139,17 @@ export default function Home() {
 
           <button
             type="submit"
-            className="w-[80%] mx-auto transition-all duration-100  ease-in-out hover:scale-110 bg-jetBlack text-white font-bold rounded-md p-3"
+            className="w-[80%] mx-auto transition-all duration-100 text-center flex justify-center ease-in-out hover:scale-110 bg-jetBlack text-white font-bold rounded-md p-3"
           >
-            Login
+            {loading ? (
+              <div className=" animate-spin duration-200 rounded-full mx-auto text-center size-5 bg-white">
+                <div className=" animate-spin rounded-full size-2 bg bg-blue-500">
+                  {" "}
+                </div>
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
       </section>

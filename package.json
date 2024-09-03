@@ -10,11 +10,13 @@
     "server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "cookie": "^0.6.0",
     "lodash.debounce": "^4.0.8",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.53.0"
+    "react-hook-form": "^7.53.0",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^8",

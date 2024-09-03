@@ -1,34 +1,37 @@
+"use client";
 import SideBar from "@/components/sidebar";
 import Image from "next/image";
 import Bio from "./bio";
 import TopBar from "./topBar";
+import { fetchData } from "./fetchData";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { get } from "react-hook-form";
 
-async function fetchData() {
-  try {
-    const response = await fetch(
-      "https://json-server-sigma-smoky.vercel.app/user",
-      {
-        cache: "no-store",
+export default function Profile() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  async function getData() {
+    try {
+      const profileData = await fetchData();
+      if (profileData.detail) {
+        toast(profileData.detail);
       }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
+      setData(profileData);
+    } catch (error) {
+      setError("Failed to fetch data");
     }
-    return response.json();
-  } catch (error) {
-    return { error: error.message };
   }
-}
 
-export default async function Profile() {
-  const data = await fetchData();
-
-  if (data.error) {
+  useEffect(() => {
+    getData();
+  }, []);
+  if (data?.error) {
     return <p>Error: {data.error}</p>;
   }
 
   if (!data || data.length === 0) {
-    return <p>No data available</p>;
+    return <p className="text-center">Loading...</p>;
   }
 
   return (
@@ -38,8 +41,8 @@ export default async function Profile() {
       </div>
 
       <section className="w-full">
-        <TopBar />
-        <Bio data={data} />
+        <TopBar image={data.image} />
+        <Bio data={data} refresh={getData} />
       </section>
     </main>
   );

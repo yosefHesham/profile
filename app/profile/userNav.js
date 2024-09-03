@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import TextInput from "./TextInput";
 import { useCallback } from "react";
 import debounce from "lodash.debounce";
+import toast from "react-hot-toast";
 
 const navItems = [
   {
@@ -28,8 +29,8 @@ const navItems = [
 export default function UserNav({ isEditable, data }) {
   const defaultValues = data
     ? {
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstName: data.first_name,
+        lastName: data.last_name,
         phone: data.phone,
         dob: data.dob,
         gender: data.gender,
@@ -71,50 +72,51 @@ export default function UserNav({ isEditable, data }) {
   });
 
   const patchData = useCallback(async (data) => {
+    const url = "https://cyparta-backend-gf7qm.ondigitalocean.app/api/profile/";
+
+    const token = window.localStorage.getItem("token");
     try {
-      const response = await fetch(
-        "https://json-server-sigma-smoky.vercel.app/user",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-            dob: data.dob,
-            gender: data.gender,
-            address: data.address,
-            state: data.state,
-            workHours: data.workHours,
-            email: data.email,
-            maritalStatus: data.maritalStatus,
-            nationality: data.nationality,
-            city: data.city,
-            zipCode: data.zipCode,
-            salary: data.salary,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to update data");
-      }
-
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          phone: data.phone,
+          dob: data.dob,
+          gender: data.gender,
+          address: data.address,
+          state: data.state,
+          workHours: data.workHours,
+          email: data.email,
+          maritalStatus: data.maritalStatus,
+          nationality: data.nationality,
+          city: data.city,
+          zipCode: data.zipCode,
+          salary: data.salary,
+        }),
+      });
       const result = await response.json();
-    } catch (error) {}
+      if (result.detail) {
+        toast(result.detail);
+        return;
+      }
+    } catch (error) {
+      toast(error);
+    }
   }, []);
 
   const debouncedPatchData = useCallback(debounce(patchData, 500), [patchData]);
 
   const handleChange = (event) => {
-    console.log(getValues());
     debouncedPatchData(getValues());
   };
 
   const onSubmit = (data) => {
-    console.log("Form submitted", data);
+    debouncedPatchData(getValues());
   };
 
   return (
@@ -157,6 +159,17 @@ export default function UserNav({ isEditable, data }) {
               editable={isEditable}
               errorMessage={errors.firstName?.message}
             />
+            <div className="block md:hidden w-full">
+              <TextInput
+                register={register("lastName", {
+                  required: "This field is required",
+                })}
+                name="lastName"
+                label="Last Name"
+                editable={isEditable}
+                errorMessage={errors.lastName?.message}
+              />
+            </div>
 
             <TextInput
               register={register("phone", {
@@ -196,15 +209,17 @@ export default function UserNav({ isEditable, data }) {
             />
           </div>
           <div className="w-full">
-            <TextInput
-              register={register("lastName", {
-                required: "This field is required",
-              })}
-              name="lastName"
-              label="Last Name"
-              editable={isEditable}
-              errorMessage={errors.lastName?.message}
-            />
+            <div className="hidden md:block w-full">
+              <TextInput
+                register={register("lastName", {
+                  required: "This field is required",
+                })}
+                name="lastName"
+                label="Last Name"
+                editable={isEditable}
+                errorMessage={errors.lastName?.message}
+              />
+            </div>
 
             <TextInput
               register={register("email", {
@@ -271,7 +286,7 @@ export default function UserNav({ isEditable, data }) {
               errorMessage={errors.workHours?.message}
             />
           </div>
-          <div className=" md:col-span-2 flex flex-col md:items-end">
+          <div className=" md:col-span-2 md:-mr-8 flex flex-col md:items-end">
             <TextInput
               register={register("zipCode", {
                 required: "This field is required",
@@ -294,7 +309,7 @@ export default function UserNav({ isEditable, data }) {
               errorMessage={errors.salary?.message}
             />
           </div>
-          <div className={`flex flex-col mb-5 self-end font-primary`}>
+          <div className={`flex flex-col mb-5 md:ml-16 self-end font-primary`}>
             <label className="text-red-500 font-light mb-2">Total Salary</label>
             <p>54000EGP</p>
           </div>
