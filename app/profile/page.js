@@ -1,6 +1,7 @@
 import SideBar from "@/components/sidebar";
 import Image from "next/image";
 import Bio from "./bio";
+import TopBar from "./topBar";
 
 async function fetchData() {
   try {
@@ -32,21 +33,12 @@ export default async function Profile() {
 
   return (
     <main className="flex gap-10 md:pl-4  overflow-hidden  p-4 md:pr-8 md:p-10 w-full relative">
-      <SideBar />
+      <div className="hidden md:block  w-1/3 top-0 sticky">
+        <SideBar />
+      </div>
 
       <section className="w-full">
-        <div className="flex items-center justify-end gap-5 ml-auto">
-          <Image
-            src={require("../../public/notification.png")}
-            alt="notification"
-            className="size-10"
-          />
-          <Image
-            src={require("../../public/person.png")}
-            alt="notification"
-            className="rounded-full size-16"
-          />
-        </div>
+        <TopBar />
         <Bio data={data} />
       </section>
     </main>

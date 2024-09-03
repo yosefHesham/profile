@@ -18,7 +18,7 @@ const sideData = [
   { title: "Advanced Payment", icon: require("../public/wallet.png") },
 ];
 
-export default function SideBar() {
+export default function SideBar({ hideMenu }) {
   const [activeIndex, setActive] = useState(1);
   const [expand, setExpand] = useState({});
 
@@ -32,7 +32,7 @@ export default function SideBar() {
   };
 
   return (
-    <section className="rounded-2xl border border-[#A2A1A833]  bg-[#F9F9F9] hidden md:block w-1/3 p-4   top-0 sticky font-primary">
+    <section className="rounded-2xl border border-[#A2A1A833]  bg-[#F9F9F9] w-full h-full p-4  font-primary">
       <Image
         src={require("../public/logo.png")}
         alt="logo"
@@ -42,7 +42,11 @@ export default function SideBar() {
 
       <div className="mt-20 flex flex-col gap-9 overflow-hidden ">
         {sideData.map((item, index) => (
-          <div key={index} className="w-full overflow-hidden cursor-pointer">
+          <div
+            key={index}
+            className="w-full overflow-hidden cursor-pointer"
+            onClick={() => hideMenu && hideMenu()}
+          >
             <div
               onClick={() => setActive(index)}
               className={`relative flex items-center transition-all duration-100 ease-in-out justify-center ${
