@@ -40,7 +40,7 @@ export default function SideBar({ hideMenu }) {
         style={{ boxShadow: " 1px 1px 3px 0px #CACACA26" }}
       />
 
-      <div className="mt-20 flex flex-col  gap-9 overflow-hidden ">
+      <div className="mt-20 flex flex-col  gap-10 overflow-hidden ">
         {sideData.map((item, index) => (
           <div
             key={index}
@@ -74,6 +74,8 @@ export default function SideBar({ hideMenu }) {
                     expand[index] ? "rotate-90" : ""
                   }`}
                   onClick={(e) => {
+                    e.stopPropagation();
+
                     handleExpand(index);
                   }}
                 />
@@ -81,7 +83,7 @@ export default function SideBar({ hideMenu }) {
             </div>
             {item.subMenu && (
               <div
-                className={`ml-32 flex flex-col gap-4 mt-2     transition-all  duration-500 ease-in-out transform ${
+                className={`md:ml-32 ml-20 flex flex-col gap-4 mt-2     transition-all  duration-500 ease-in-out transform ${
                   expand[index]
                     ? "max-h-96 opacity-100 translate-y-0 mt-4"
                     : "max-h-0 opacity-0 -translate-y-4"
