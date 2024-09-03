@@ -26,7 +26,7 @@ export default function Home() {
       <Image src={require("../public/logo.png")} alt="logo" />
 
       <section
-        className="rounded-md p-4  mt-7 border border-lightGray w-[35%] mx-auto"
+        className="rounded-md p-4  mt-7 border border-lightGray w-[80%] md:w-[35%] mx-auto"
         style={{ boxShadow: " 0px 4px 4px 0px #9D9D9D33" }}
       >
         <form
