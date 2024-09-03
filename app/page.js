@@ -28,7 +28,7 @@ export default function Home() {
       <Image src={require("../public/logo.png")} alt="logo" />
 
       <section
-        className="rounded-md p-4  mt-7 border border-lightGray w-[90%] md:w-[50%] lg:[35%] mx-auto"
+        className="rounded-md p-4  mt-7 border border-lightGray w-[90%] md:w-[50%] lg:[30%] mx-auto"
         style={{ boxShadow: " 0px 4px 4px 0px #9D9D9D33" }}
       >
         <form
@@ -83,7 +83,7 @@ export default function Home() {
               className="w-full p-2  border rounded-md shadow-sm focus:outline-none  focus:border-onyx"
             />
             <div
-              className="cursor-pointer absolute top-1/2 right-2 size-5"
+              className="cursor-pointer absolute  top-9 right-2 size-5"
               onClick={() => setIsVisible(!isVisible)}
             >
               {isVisible ? (

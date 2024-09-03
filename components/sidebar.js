@@ -40,7 +40,7 @@ export default function SideBar({ hideMenu }) {
         style={{ boxShadow: " 1px 1px 3px 0px #CACACA26" }}
       />
 
-      <div className="mt-20 flex flex-col gap-9 overflow-hidden ">
+      <div className="mt-20 flex flex-col  gap-9 overflow-hidden ">
         {sideData.map((item, index) => (
           <div
             key={index}
@@ -49,14 +49,14 @@ export default function SideBar({ hideMenu }) {
           >
             <div
               onClick={() => setActive(index)}
-              className={`relative flex items-center transition-all duration-100 ease-in-out justify-center ${
+              className={`relative flex items-center transition-all duration-100 ease-in-out justify-start ${
                 isActive(index) ? "bg-[#F9EAEB]  rounded-r-lg py-2" : ""
               }`}
             >
               {isActive(index) && (
                 <div className="absolute z-20 left-0 w-[5px] rounded-md h-full bg-[#EC232B]"></div>
               )}
-              <div className="flex gap-4 items-center">
+              <div className="flex ml-[20%] gap-4 items-center">
                 <Image src={item.icon} alt={item.title} />
                 <p
                   className={`font-semibold ${
