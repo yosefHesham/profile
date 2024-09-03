@@ -32,24 +32,26 @@ export default function SideBar() {
   };
 
   return (
-    <section className="rounded-2xl w-1/3 p-4 h-screen top-0 sticky shadow-md font-primary">
+    <section className="rounded-2xl border border-[#A2A1A833]  bg-[#F9F9F9] hidden md:block w-1/3 p-4   top-0 sticky font-primary">
       <Image
         src={require("../public/logo.png")}
         alt="logo"
         className="mx-auto"
+        style={{ boxShadow: " 1px 1px 3px 0px #CACACA26" }}
       />
 
-      <div className="mt-14 flex flex-col gap-4 overflow-hidden ">
+      <div className="mt-20 flex flex-col gap-9 overflow-hidden ">
         {sideData.map((item, index) => (
           <div key={index} className="w-full overflow-hidden cursor-pointer">
             <div
               onClick={() => setActive(index)}
               className={`relative flex items-center transition-all duration-100 ease-in-out justify-center ${
-                isActive(index)
-                  ? "bg-[#F9EAEB] rounded-r-lg p-2 border-l-2 border-[#EC232B]"
-                  : ""
+                isActive(index) ? "bg-[#F9EAEB]  rounded-r-lg py-2" : ""
               }`}
             >
+              {isActive(index) && (
+                <div className="absolute z-20 left-0 w-[5px] rounded-md h-full bg-[#EC232B]"></div>
+              )}
               <div className="flex gap-4 items-center">
                 <Image src={item.icon} alt={item.title} />
                 <p

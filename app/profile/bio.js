@@ -7,14 +7,30 @@ export default function Bio({ data }) {
   const [editable, setEditable] = useState(false);
   return (
     <section className="font-primary w-full mt-10">
-      <div className="flex items-center gap-2 text-raisinBlack font-semibold">
-        <p>Employees</p>
-        <Image
-          src={require("../../public/right-arrow.png")}
-          alt="arrow"
-          className="h-4 w-3"
-        />
-        <p>Profile</p>
+      <div className="flex items-center gap-10 justify-between w-full text-raisinBlack font-semibold">
+        <div className="flex items-center gap-2">
+          <p className="text-sm md:text-base">Employees</p>
+          <Image
+            src={require("../../public/right-arrow.png")}
+            alt="arrow"
+            className="md:h-4 md:w-3 h-3 w-2"
+          />
+          <p className="text-sm md:text-base">Profile</p>
+        </div>
+        <button
+          type="submit"
+          onClick={() => setEditable(true)}
+          className="  bg-jetBlack p-2 ml-auto  md:hidden transition-all duration-100 ease-in-out hover:scale-110  self-end text-white font-semibold rounded-md "
+        >
+          <div className="flex items-center  gap-3 font-bold text-white">
+            <Image
+              src={require("../../public/edit.png")}
+              alt="edit"
+              className="size-5"
+            />
+            <p className="text-xs">Edit Profile</p>
+          </div>
+        </button>
       </div>
 
       <div className="flex justify-between py-4 border-b mt-5  border-[#A2A1A833]">
@@ -35,7 +51,7 @@ export default function Bio({ data }) {
         <button
           type="submit"
           onClick={() => setEditable(true)}
-          className="  bg-jetBlack p-4  transition-all duration-100 ease-in-out hover:scale-110 mr-20 self-end text-white font-bold rounded-md "
+          className="  bg-jetBlack p-3 hidden md:block transition-all duration-100 ease-in-out hover:scale-110 mr-20 self-end text-white font-bold rounded-lg "
         >
           <div className="flex  gap-3 font-bold text-white">
             <Image src={require("../../public/edit.png")} alt="edit" />

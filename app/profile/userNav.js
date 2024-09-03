@@ -119,7 +119,7 @@ export default function UserNav({ isEditable, data }) {
 
   return (
     <section className="w-full mt-10">
-      <div className="flex w-full gap-10 border-b border-[#A2A1A833] font-primary ">
+      <div className="flex  overflow-x-scroll scrollbar-hide   w-full gap-10 border-b border-[#A2A1A833] font-primary ">
         {navItems.map((item, index) => (
           <div
             key={index}
@@ -129,9 +129,9 @@ export default function UserNav({ isEditable, data }) {
           >
             <Image src={item.icon} alt={item.title} />
             <p
-              className={`${
+              className={`text-xs md:text-base  ${
                 !index
-                  ? "text-[#EC232B] font-semibold"
+                  ? "text-[#EC232B]  font-semibold"
                   : "text-[#16151C] font-light"
               }`}
             >
@@ -144,10 +144,10 @@ export default function UserNav({ isEditable, data }) {
       <form
         onChange={handleChange}
         onSubmit={handleSubmit(onSubmit)}
-        className="pr-10 mt-7"
+        className="md:pr-10 px-2 mt-7"
       >
-        <div className="grid grid-cols-2 items-center gap-10">
-          <div>
+        <div className="grid md:grid-cols-2  justify-items-center items-center  md:gap-10">
+          <div className="w-full">
             <TextInput
               register={register("firstName", {
                 required: "This field is required",
@@ -195,7 +195,7 @@ export default function UserNav({ isEditable, data }) {
               errorMessage={errors.address?.message}
             />
           </div>
-          <div>
+          <div className="w-full">
             <TextInput
               register={register("lastName", {
                 required: "This field is required",
@@ -247,7 +247,7 @@ export default function UserNav({ isEditable, data }) {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           <div>
             <TextInput
               register={register("state", {
@@ -271,7 +271,7 @@ export default function UserNav({ isEditable, data }) {
               errorMessage={errors.workHours?.message}
             />
           </div>
-          <div>
+          <div className=" md:col-span-2 flex flex-col md:items-end">
             <TextInput
               register={register("zipCode", {
                 required: "This field is required",

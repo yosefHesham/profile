@@ -31,7 +31,7 @@ export default async function Profile() {
   }
 
   return (
-    <main className="flex gap-10 pl-4 pr-8 p-10 w-full relative">
+    <main className="flex gap-10 md:pl-4  overflow-hidden  p-4 md:pr-8 md:p-10 w-full relative">
       <SideBar />
 
       <section className="w-full">

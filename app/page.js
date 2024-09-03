@@ -26,7 +26,7 @@ export default function Home() {
       <Image src={require("../public/logo.png")} alt="logo" />
 
       <section
-        className="rounded-md p-4  mt-7 border border-lightGray w-[80%] md:w-[35%] mx-auto"
+        className="rounded-md p-4  mt-7 border border-lightGray w-[90%] md:w-[50%] lg:[35%] mx-auto"
         style={{ boxShadow: " 0px 4px 4px 0px #9D9D9D33" }}
       >
         <form
@@ -67,7 +67,7 @@ export default function Home() {
               Password
             </label>
             <input
-              type="password"
+              type="textt"
               id="password"
               name="password"
               placeholder="***********"
