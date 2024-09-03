@@ -15,7 +15,7 @@ export default function Profile() {
     try {
       const profileData = await fetchData();
       if (profileData.detail) {
-        toast(profileData.detail);
+        setError("Not Authorized");
       }
       setData(profileData);
     } catch (error) {
@@ -26,8 +26,8 @@ export default function Profile() {
   useEffect(() => {
     getData();
   }, []);
-  if (data?.error) {
-    return <p>Error: {data.error}</p>;
+  if (error) {
+    return <p>Error: {error}</p>;
   }
 
   if (!data || data.length === 0) {
