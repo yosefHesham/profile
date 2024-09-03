@@ -4,9 +4,12 @@ import Bio from "./bio";
 
 async function fetchData() {
   try {
-    const response = await fetch("http://localhost:4000/user", {
-      cache: "no-store",
-    });
+    const response = await fetch(
+      "https://json-server-sigma-smoky.vercel.app/user",
+      {
+        cache: "no-store",
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }

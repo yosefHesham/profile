@@ -72,28 +72,31 @@ export default function UserNav({ isEditable, data }) {
 
   const patchData = useCallback(async (data) => {
     try {
-      const response = await fetch("http://localhost:4000/user", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          phone: data.phone,
-          dob: data.dob,
-          gender: data.gender,
-          address: data.address,
-          state: data.state,
-          workHours: data.workHours,
-          email: data.email,
-          maritalStatus: data.maritalStatus,
-          nationality: data.nationality,
-          city: data.city,
-          zipCode: data.zipCode,
-          salary: data.salary,
-        }),
-      });
+      const response = await fetch(
+        "https://json-server-sigma-smoky.vercel.app/user",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phone: data.phone,
+            dob: data.dob,
+            gender: data.gender,
+            address: data.address,
+            state: data.state,
+            workHours: data.workHours,
+            email: data.email,
+            maritalStatus: data.maritalStatus,
+            nationality: data.nationality,
+            city: data.city,
+            zipCode: data.zipCode,
+            salary: data.salary,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update data");
