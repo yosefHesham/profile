@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
     router.push("/profile");
   };
 
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <main className="flex flex-col items-center mt-24 font-primary">
       <Image src={require("../public/logo.png")} alt="logo" />
@@ -59,7 +61,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <label
               htmlFor="password"
               className="block text-jetBlack text-sm font-semibold mb-1"
@@ -67,7 +69,7 @@ export default function Home() {
               Password
             </label>
             <input
-              type="textt"
+              type={isVisible ? "text" : "password"}
               id="password"
               name="password"
               placeholder="***********"
@@ -80,6 +82,16 @@ export default function Home() {
               })}
               className="w-full p-2  border rounded-md shadow-sm focus:outline-none  focus:border-onyx"
             />
+            <div
+              className="cursor-pointer absolute top-1/2 right-2 size-5"
+              onClick={() => setIsVisible(!isVisible)}
+            >
+              {isVisible ? (
+                <Image src={require("../public/eye.png")} alt="eye" />
+              ) : (
+                <Image src={require("../public/eye-slash.png")} alt="eye" />
+              )}
+            </div>
             {errors.password && (
               <p className="text-red-500"> {errors.password.message} </p>
             )}
