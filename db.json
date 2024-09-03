@@ -1,20 +1,18 @@
 {
-    "user":{
-        "email":"test@task.com",
-        "password":"12345678",
-        "firstName":"Mariam",
-        "lastName":"Aly",
-        "phone":"01095727079",
-        "dob":"27 July, 1998",
-        "maritalStatus":"Single",
-        "gender":"Female",
-        "nationality":"Egyptian",
-        "address":"Cairo",
-        "city":"Cairo",
-        "state":"Cairo",
-        "zip":"451335",
-        "workHours":"180 h",
-        "salary":"300 EGP"
-
-    }
+  "user": {
+    "firstName": "Mariam Mohammed",
+    "lastName": "Aly Hussein",
+    "phone": "01095727079",
+    "dob": "27 July, 1998",
+    "gender": "Female",
+    "address": "Cairo",
+    "state": "Cairo",
+    "workHours": "180 h",
+    "email": "test@task.com",
+    "maritalStatus": "Single",
+    "nationality": "Egyptian",
+    "city": "Cairo",
+    "zipCode": "",
+    "salary": "300 EGP"
+  }
 }

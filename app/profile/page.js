@@ -4,7 +4,9 @@ import Bio from "./bio";
 
 async function fetchData() {
   try {
-    const response = await fetch("http://localhost:4000/user");
+    const response = await fetch("http://localhost:4000/user", {
+      cache: "no-store",
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -14,7 +16,7 @@ async function fetchData() {
   }
 }
 
-export default async function Hello() {
+export default async function Profile() {
   const data = await fetchData();
 
   if (data.error) {
