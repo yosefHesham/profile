@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -57,11 +57,18 @@ export default function Home() {
       return;
     }
     localStorage.setItem("token", result.access);
-    router.push("/profile");
+    router.replace("/profile");
   };
 
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/profile");
+    }
+  }, []);
 
   return (
     <main className="flex flex-col items-center mt-24 font-primary">

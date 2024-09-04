@@ -7,6 +7,7 @@ import { fetchData } from "./fetchData";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { get } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const [data, setData] = useState(null);
@@ -23,7 +24,12 @@ export default function Profile() {
     }
   }
 
+  const router = useRouter();
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.replace("/");
+    }
     getData();
   }, []);
   if (error) {
