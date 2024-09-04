@@ -44,6 +44,10 @@ export default function Home() {
   });
 
   const router = useRouter();
+  const token = localStorage.getItem("token");
+  if (token) {
+    router.push("/profile");
+  }
 
   const onSubmit = async (e) => {
     setLoading(true);
@@ -57,18 +61,11 @@ export default function Home() {
       return;
     }
     localStorage.setItem("token", result.access);
-    router.replace("/profile");
+    router.push("/profile");
   };
 
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      router.replace("/profile");
-    }
-  }, []);
 
   return (
     <main className="flex flex-col items-center mt-24 font-primary">
